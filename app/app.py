@@ -1,15 +1,16 @@
+from src.prediction import generate_text
+from src.model import load_prediction_assets
+import streamlit as st
 from pathlib import Path
 import pickle
+import sys
 from html import escape
-
-import streamlit as st
-
-from src.model import load_prediction_assets
-from src.prediction import generate_text
 
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
 MODEL_DIR = ROOT_DIR / "models"
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
 
 
 st.set_page_config(
