@@ -1,8 +1,7 @@
-from src.prediction import generate_text
-from src.model import load_prediction_assets
 import streamlit as st
 from pathlib import Path
 import pickle
+import importlib
 import sys
 from html import escape
 
@@ -12,6 +11,10 @@ MODEL_DIR = ROOT_DIR / "models"
 if str(ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(ROOT_DIR))
 
+load_prediction_assets = importlib.import_module(
+    "src.model"
+).load_prediction_assets
+generate_text = importlib.import_module("src.prediction").generate_text
 
 st.set_page_config(
     page_title="Next Word Studio",
