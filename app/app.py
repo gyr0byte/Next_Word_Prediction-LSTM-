@@ -24,14 +24,15 @@ st.markdown(
 	@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
 
 	:root {
-		--ink: #172323;
-		--muted: #61706d;
-		--paper: #f5f3ec;
-		--panel: #fffdf8;
-		--line: #d9ded7;
-		--teal: #1c726d;
-		--coral: #dd735f;
-		--yellow: #f1c75b;
+        color-scheme: dark;
+        --ink: #edf6f1;
+        --muted: #a4b9b4;
+        --paper: #0b1517;
+        --panel: #132326;
+        --line: #2a4446;
+        --teal: #73d4c9;
+        --coral: #ff866f;
+        --yellow: #f5cb6b;
 	}
 
 	.stApp {
@@ -42,10 +43,14 @@ st.markdown(
 
 	[data-testid="stHeader"] { background: transparent; }
 	[data-testid="stSidebar"] {
-		background: #e5eee8;
+        background: #101f22;
 		border-right: 1px solid var(--line);
 	}
 	[data-testid="stSidebar"] > div:first-child { padding-top: 2rem; }
+    [data-testid="stSidebar"] .stMarkdown p,
+    [data-testid="stSidebar"] .stMarkdown h2,
+    [data-testid="stSidebar"] .stMarkdown h3,
+    [data-testid="stSidebar"] label { color: var(--ink) !important; }
 
 	.hero {
 		padding: 1.5rem 0 2.25rem;
@@ -67,7 +72,7 @@ st.markdown(
 		border: 1px solid var(--line);
 		border-radius: 10px;
 		padding: 1.25rem 1.35rem 1.35rem;
-		box-shadow: 0 14px 35px rgba(23, 35, 35, 0.06);
+        box-shadow: 0 14px 35px rgba(0, 0, 0, 0.24);
 	}
 	.section-label {
 		color: var(--teal);
@@ -79,7 +84,8 @@ st.markdown(
 	}
 	.result-label { margin-top: 1.1rem; }
 	.result-box {
-		background: #173c3a;
+        background: #071c1d;
+        border: 1px solid #2b5a58;
 		border-radius: 8px;
 		color: #f7f4e9;
 		font-family: 'Space Grotesk', sans-serif;
@@ -90,16 +96,16 @@ st.markdown(
 	}
 	.placeholder { color: #a9c2bb; }
 	.tip {
-		background: #fff2ca;
+        background: #302b1d;
 		border-left: 4px solid var(--yellow);
 		border-radius: 4px;
-		color: #66521b;
+        color: #f5d98c;
 		font-size: 0.88rem;
 		line-height: 1.5;
 		padding: 0.75rem 0.9rem;
 	}
 	.stTextArea textarea {
-		background: #fffefb;
+        background: #0d1b1d;
 		border: 1px solid var(--line);
 		border-radius: 6px;
 		color: var(--ink);
@@ -117,6 +123,9 @@ st.markdown(
 		width: 100%;
 	}
 	.stButton > button:hover { background: #c95e4c; color: white; }
+    .stButton > button p { color: white !important; }
+    .stTextArea label, .stSlider label { color: var(--ink) !important; }
+    [data-testid="stMarkdownContainer"] p { color: var(--ink); }
 	.stSlider [data-baseweb="slider"] { padding-top: 0.2rem; }
 	footer { visibility: hidden; }
 	</style>
@@ -205,7 +214,6 @@ st.markdown(
 
 left_column, right_column = st.columns([1.35, 1], gap="large")
 with left_column:
-    st.markdown('<div class="workspace">', unsafe_allow_html=True)
     st.markdown('<div class="section-label">Your opening</div>',
                 unsafe_allow_html=True)
     prompt = st.text_area(
@@ -229,7 +237,6 @@ with left_column:
         )
     st.markdown("<br>", unsafe_allow_html=True)
     generate_clicked = st.button("Generate continuation", type="primary")
-    st.markdown("</div>", unsafe_allow_html=True)
 
 with right_column:
     st.markdown("### Need a starting point?")
