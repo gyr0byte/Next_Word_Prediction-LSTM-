@@ -11,6 +11,33 @@ An end-to-end next-word prediction project built with TensorFlow/Keras and Strea
 - Temperature sampling for more focused or more varied text
 - Dark, responsive user interface
 
+## Demo
+
+![App screenshot](docs/screenshot.png)
+
+- **Live Demo**: [https://next-word-pred1.streamlit.app/](https://next-word-pred1.streamlit.app/)
+- **Example Prompt**: `the only way to`
+- **Generated Continuation**: `the only way to us find yourself and make ourselves the rise in you`
+
+## Results
+
+### Model Training Metrics
+
+- **Dataset Size**: 3,038 quotes (rows)
+- **Epochs Trained**: 100
+- **Final Training Loss**: TODO: fill in
+- **Final Validation Loss**: TODO: fill in
+
+### Sample Outputs Across Temperatures
+
+Sample generations starting from prompt `"the only way to"`:
+
+| Temperature | Prompt | Generated Continuation |
+| :--- | :--- | :--- |
+| `0.5` | `the only way to` | `the only way to make life not never reach` |
+| `1.0` | `the only way to` | `the only way to break your whole life if` |
+| `1.5` | `the only way to` | `the only way to something while yourself is within` |
+
 ## Project Structure
 
 ```text
@@ -19,6 +46,8 @@ An end-to-end next-word prediction project built with TensorFlow/Keras and Strea
 │   └── app.py                  # Streamlit application entry point
 ├── data/
 │   └── quote_dataset.csv       # Training dataset
+├── docs/
+│   └── screenshot.png          # Application screenshot
 ├── models/
 │   ├── lstm_model.h5           # Trained Keras model
 │   ├── tokenizer.pkl           # Fitted text tokenizer
@@ -28,8 +57,10 @@ An end-to-end next-word prediction project built with TensorFlow/Keras and Strea
 ├── src/
 │   ├── model.py                # Model and artifact loading
 │   └── prediction.py           # Next-word prediction and generation
-├── tests/                      # Reserved for automated tests
+├── tests/
+│   └── test_prediction.py      # Automated prediction tests
 ├── .gitignore
+├── LICENSE                     # MIT License
 ├── requirements.txt
 ├── runtime.txt
 └── README.md
@@ -170,4 +201,4 @@ python -m streamlit run app/app.py --server.port 8502
 
 ## License
 
-No license has been added yet. Add a `LICENSE` file before distributing this project publicly.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
