@@ -31,6 +31,7 @@ An end-to-end next-word prediction project built with TensorFlow/Keras and Strea
 ├── tests/                      # Reserved for automated tests
 ├── .gitignore
 ├── requirements.txt
+├── runtime.txt
 └── README.md
 ```
 
@@ -113,6 +114,16 @@ To use a different port:
 ```bash
 python -m streamlit run app/app.py --server.port 8502
 ```
+
+## Deploy on Streamlit Community Cloud
+
+1. Push the repository to GitHub, including the `models/` directory and its three artifact files.
+2. Open [share.streamlit.io](https://share.streamlit.io/) and select **New app**.
+3. Choose the repository and branch.
+4. Set the main file path to `app/app.py`.
+5. Deploy the app.
+
+The repository includes `runtime.txt` for Python 3.12 and pinned dependency versions for a reproducible cloud build. If deployment fails, open **Manage app** and check the build logs for the first package error.
 
 ## Using the App
 
