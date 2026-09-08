@@ -2,19 +2,47 @@
 __pycache__/
 *.py[cod]
 *$py.class
+.python-version
+
+# Packaging and build output
+build/
+dist/
+*.egg-info/
+
+# Test, type-checker, and coverage output
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
 
 # Virtual environments
 .venv/
 venv/
 env/
 
+# Local environment files
+.env
+.env.*
+!.env.example
+
 # Notebook-generated files
 .ipynb_checkpoints/
 
+# Training and experiment output
+logs/
+runs/
+tensorboard/
+models/checkpoints/
+
 # Local Streamlit configuration and secrets
+.streamlit/*
 .streamlit/secrets.toml
+!.streamlit/config.toml
 
 # Tool and OS files
 .vscode/
 .DS_Store
 Thumbs.db
+*.swp
+*.swo

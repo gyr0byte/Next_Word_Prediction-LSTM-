@@ -25,7 +25,9 @@ An end-to-end next-word prediction project built with TensorFlow/Keras and Strea
 │   └── max_len.pkl             # Maximum input sequence length
 ├── notebooks/
 │   └── next_word_pred.ipynb    # Data preparation and model training
-├── src/                        # Reserved for reusable modules
+├── src/
+│   ├── model.py                # Model and artifact loading
+│   └── prediction.py           # Next-word prediction and generation
 ├── tests/                      # Reserved for automated tests
 ├── .gitignore
 ├── requirements.txt
@@ -44,6 +46,8 @@ The application uses the following inference pipeline:
 6. The new word is appended to the prompt and the process repeats.
 
 TensorFlow is imported lazily, so the interface can render before the ML runtime and model are initialized. The loaded model is cached for subsequent predictions.
+
+The Streamlit layer in `app/app.py` handles layout, user input, and session state. The reusable model and prediction logic lives in `src/`, keeping it available for automated tests or a future API without importing the UI.
 
 ## Requirements
 

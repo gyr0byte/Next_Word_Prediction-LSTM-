@@ -2,8 +2,10 @@ from pathlib import Path
 import pickle
 from html import escape
 
-import numpy as np
 import streamlit as st
+
+from src.model import load_prediction_assets
+from src.prediction import generate_text
 
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
@@ -135,49 +137,8 @@ st.markdown(
 
 
 @st.cache_resource(show_spinner="Loading the LSTM model...")
-def load_prediction_assets():
-    from tensorflow.keras.models import load_model
-
-    model = load_model(MODEL_DIR / "lstm_model.h5")
-    with (MODEL_DIR / "tokenizer.pkl").open("rb") as file:
-        tokenizer = pickle.load(file)
-    with (MODEL_DIR / "max_len.pkl").open("rb") as file:
-        max_len = pickle.load(file)
-    index_to_word = {index: word for word,
-                     index in tokenizer.word_index.items()}
-    return model, tokenizer, max_len, index_to_word
-
-
-def predict_next_word(model, tokenizer, index_to_word, text, max_len, temperature):
-    from tensorflow.keras.preprocessing.sequence import pad_sequences
-
-    token_sequence = tokenizer.texts_to_sequences([text.lower()])
-    padded_sequence = pad_sequences(
-        token_sequence,
-        maxlen=max_len,
-        padding="post",
-        truncating="pre",
-    )
-    predictions = model.predict(padded_sequence, verbose=0)[0]
-    predictions[0] = 0
-    logits = np.log(predictions + 1e-8) / temperature
-    logits -= np.max(logits)
-    probabilities = np.exp(logits)
-    probabilities /= probabilities.sum()
-    predicted_index = np.random.choice(len(probabilities), p=probabilities)
-    return index_to_word.get(int(predicted_index), "<unk>")
-
-
-def generate_text(model, tokenizer, index_to_word, prompt, max_len, word_count, temperature):
-    generated_text = prompt.strip()
-    for _ in range(word_count):
-        next_word = predict_next_word(
-            model, tokenizer, index_to_word, generated_text, max_len, temperature
-        )
-        if next_word == "<unk>":
-            break
-        generated_text = f"{generated_text} {next_word}".strip()
-    return generated_text
+def get_prediction_assets():
+    return load_prediction_assets(MODEL_DIR)
 
 
 with st.sidebar:
@@ -265,7 +226,7 @@ if generate_clicked:
         st.warning("Enter a few words before generating a continuation.")
     else:
         try:
-            model, tokenizer, max_len, index_to_word = load_prediction_assets()
+            model, tokenizer, max_len, index_to_word = get_prediction_assets()
             with st.spinner("Finding the next words..."):
                 st.session_state["generated_text"] = generate_text(
                     model,
