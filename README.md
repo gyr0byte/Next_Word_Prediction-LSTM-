@@ -4,7 +4,7 @@ An LSTM-based next-word prediction project trained on a quote dataset.
 
 ## Project Layout
 
-- `app/` - Streamlit interface (to be added)
+- `app/` - Streamlit interface
 - `data/` - Training data
 - `models/` - Saved model and preprocessing artifacts
 - `notebooks/` - Exploration and training notebook
@@ -13,4 +13,13 @@ An LSTM-based next-word prediction project trained on a quote dataset.
 
 ## Status
 
-The notebook and trained artifacts are organized and ready for the Streamlit UI implementation.
+The notebook, trained artifacts, and first Streamlit interface are ready for local use.
+
+## Run Locally
+
+Install the dependencies and start the app from the project root:
+
+```bash
+pip install -r requirements.txt
+streamlit run app/app.py
+```
